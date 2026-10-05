@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- E-mail de Confirmação de Encomenda & Solicitação de Pagamento/Comprovativo -->
+        <record id="email_template_arby_order_confirmation" model="mail.template">
+            <field name="name">ORTEK ARBY: Confirmação de Encomenda</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Sua encomenda {{ object.name }} na ORTEK ARBY foi recebida!</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; line-height: 1.6;">
+                    <p>Olá, <strong><t t-out="object.partner_id.name"/></strong>,</p>
+                    <p>Muito obrigado pela sua encomenda <strong><t t-out="object.name"/></strong> na <strong>ORTEK ARBY</strong>.</p>
+                    <p>Para darmos início ao processamento da sua peça, por favor efetue o pagamento do sinal (ou valor total) e envie o comprovativo através do nosso portal de e-commerce.</p>
+
+                    <div style="margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #000000;">
+                        <p style="margin: 0;"><strong>Valor Total:</strong> <t t-out="object.amount_total" t-options='{"widget": "monetary", "display_currency": object.currency_id}'/></p>
+                        <p style="margin: 0;"><strong>Data Limite do Ciclo (15 dias):</strong> <t t-out="object.deadline_date"/></p>
+                    </div>
+
+                    <p>Pode acompanhar o estado da sua encomenda e agendar provas no seu painel de cliente:</p>
+                    <p style="text-align: center; margin: 30px 0;">
+                        <a t-att-href="'/my/orders/%s' % object.id" style="background-color: #000000; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Ver a Minha Encomenda
+                        </a>
+                    </p>
+                    <p>Com os melhores cumprimentos,<br/>Equipa <strong>ORTEK ARBY</strong></p>
+                </div>
+            </field>
+        </record>
+
+        <!-- E-mail de Notificação de Agendamento de Prova de Roupa -->
+        <record id="email_template_arby_fitting_notification" model="mail.template">
+            <field name="name">ORTEK ARBY: Notificação de Prova Agendada</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Agendamento de Prova - Encomenda {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; line-height: 1.6;">
+                    <p>Estimada <strong><t t-out="object.partner_id.name"/></strong>,</p>
+                    <p>Sua encomenda <strong><t t-out="object.name"/></strong> avançou para a etapa de <strong><t t-out="object.arby_stage_id.name"/></strong>.</p>
+                    <p>Aguardamos por si na nossa loja/showroom para a realização da sua prova de roupa presencial.</p>
+                    <p>Se necessitar de alterar o horário ou tiver dúvidas, contacte a nossa equipa de apoio ao cliente.</p>
+                    <br/>
+                    <p>Com os melhores cumprimentos,<br/>Equipa <strong>ORTEK ARBY</strong></p>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</odoo>

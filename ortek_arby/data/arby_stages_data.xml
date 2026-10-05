@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="stage_arby_draft" model="sale.order.stage">
+            <field name="name">1. Carrinho / Encomenda Criada</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="stage_arby_first_payment" model="sale.order.stage">
+            <field name="name">2. Aguarda Validação do Pagamento</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="stage_arby_processing" model="sale.order.stage">
+            <field name="name">3. Em Processamento / Preparação</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="stage_arby_fitting" model="sale.order.stage">
+            <field name="name">4. Prova Agendada (Presencial / Showroom)</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="stage_arby_ready" model="sale.order.stage">
+            <field name="name">5. Pronto para Levantamento / Envio</field>
+            <field name="sequence">5</field>
+        </record>
+
+        <record id="stage_arby_delivered" model="sale.order.stage">
+            <field name="name">6. Concluído / Entregue</field>
+            <field name="sequence">6</field>
+        </record>
+    </data>
+</odoo>

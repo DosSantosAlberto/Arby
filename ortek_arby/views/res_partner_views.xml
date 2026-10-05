@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extension of res.partner Form View -->
+        <record id="view_partner_form_inherit_arby" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.arby</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- Smart Button para total de encomendas ARBY -->
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="action_view_sale_order" icon="fa-shopping-bag">
+                        <field string="Encomendas ARBY" name="total_arby_orders" widget="statinfo"/>
+                    </button>
+                </div>
+
+                <!-- Adicionar aba de informações ARBY Store -->
+                <xpath expr="//page[last()]" position="after">
+                    <page string="ORTEK ARBY - Perfil da Cliente" name="arby_profile">
+                        <group>
+                            <group string="Métricas de Fidelidade">
+                                <field name="customer_score" widget="priority"/>
+                                <field name="loyalty_tier" widget="badge"
+                                       decoration-info="loyalty_tier == 'standard'"
+                                       decoration-success="loyalty_tier == 'silver'"
+                                       decoration-warning="loyalty_tier == 'gold'"
+                                       decoration-danger="loyalty_tier == 'vip'"/>
+                            </group>
+                            <group string="Preferências e Estilo">
+                                <field name="arby_notes" placeholder="Adicione observações sobre estilos, tamanhos preferidos e atendimento..."/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

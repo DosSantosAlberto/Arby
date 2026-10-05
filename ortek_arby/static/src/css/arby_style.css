@@ -1,0 +1,77 @@
+/* ==========================================================================
+   ORTEK ARBY - Custom E-commerce & Payment Proof Styling
+   ========================================================================== */
+
+/* Card de Comprovativo de Pagamento */
+.arby-proof-card {
+    border: 1px solid #0d6efd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.08);
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+.arby-proof-card:hover {
+    box-shadow: 0 6px 18px rgba(13, 110, 253, 0.15);
+}
+
+.arby-proof-card .card-header {
+    background-color: #0d6efd;
+    color: #ffffff;
+    font-weight: 600;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 12px 20px;
+}
+
+.arby-proof-card .card-body {
+    padding: 20px;
+}
+
+/* Form e Inputs do Comprovativo */
+.arby-proof-card input[type="file"] {
+    border: 1px dashed #0d6efd;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.arby-proof-card input[type="file"]:focus {
+    border-color: #0b5ed7;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.arby-proof-btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Indicador do Kwanzas (AOA) e Preços */
+.arby-currency-aoa {
+    font-weight: 700;
+    color: #198754;
+}
+
+/* Badges de Etapas do Fit (Fitting Stages) */
+.badge-arby-stage {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50rem;
+    text-transform: uppercase;
+}
+
+/* Estilização Responsiva para Checkout em Dispositivos Móveis */
+@media (max-width: 767.98px) {
+    .arby-proof-card {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .arby-proof-card .card-body {
+        padding: 15px;
+    }
+}

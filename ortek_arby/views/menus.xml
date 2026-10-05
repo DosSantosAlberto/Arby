@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista Lista (List) Otimizada para Odoo 18 -->
+        <record id="view_ortek_ai_engine_list" model="ir.ui.view">
+            <field name="name">ortek.ai.engine.list</field>
+            <field name="model">ortek.ai.engine</field>
+            <field name="arch" type="xml">
+                <list string="Motores de IA Ortek" sample="1">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" class="fw-bold"/>
+                    <field name="model_name"/>
+                    <field name="model_version" widget="badge" decoration-info="True"/>
+                    <field name="confidence_threshold" widget="percentage"/>
+                    <field name="total_recommendations" sum="Total de Análises"/>
+                    <field name="successful_outcomes" sum="Total de Operações Bem-sucedidas"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Formulário (Form) Rico e Profissional -->
+        <record id="view_ortek_ai_engine_form" model="ir.ui.view">
+            <field name="name">ortek.ai.engine.form</field>
+            <field name="model">ortek.ai.engine</field>
+            <field name="arch" type="xml">
+                <form string="Motor de Inteligência Artificial Transversal">
+                    <header>
+                        <button name="action_test_connection"
+                                string="Testar Ligação com o Llama"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-bolt"/>
+                        <field name="active" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Designação do Motor"/>
+                            <h1><field name="name" placeholder="Ex: ORTEK Llama Engine"/></h1>
+                        </div>
+                        <group>
+                            <group string="Configuração de API e Llama (Ollama)">
+                                <field name="api_key" password="True" placeholder="ollama"/>
+                                <field name="api_endpoint" placeholder="http://localhost:11434/v1/chat/completions"/>
+                                <field name="model_name" placeholder="llama3"/>
+                            </group>
+                            <group string="Parâmetros Técnicos &amp; IA">
+                                <field name="model_version"/>
+                                <field name="confidence_threshold" widget="percentage"/>
+                                <field name="sequence"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Métricas e Desempenho Operacional">
+                                <field name="total_recommendations" readonly="1"/>
+                                <field name="successful_outcomes" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Instruções e Prompts do Sistema" name="prompts_page">
+                                <field name="notes" placeholder="Insira o prompt de sistema, diretrizes operacionais, regras de negócio ou restrições de comportamento da IA..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Ação de Janela para Motores de IA -->
+        <record id="action_ortek_ai_engine" model="ir.actions.act_window">
+            <field name="name">Motores de IA</field>
+            <field name="res_model">ortek.ai.engine</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Registe o primeiro Motor de Inteligência Artificial Ortek!
+                </p>
+                <p>
+                    Configure os parâmetros do modelo, limiares de confiança e prompts para automatizar a análise preditiva e o suporte consultivo transversal.
+                </p>
+            </field>
+        </record>
+
+        <!-- 1. Acção de Cliente para o Dashboard de IA -->
+        <record id="action_ai_company_dashboard" model="ir.actions.client">
+            <field name="name">Painel ORTEK AI</field>
+            <field name="tag">ai_company_dashboard_tag</field>
+        </record>
+
+        <!-- 2. Acção para Encomendas da ARBY (sale.order) -->
+        <record id="action_arby_orders" model="ir.actions.act_window">
+            <field name="name">Encomendas e Provas</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">list,kanban,form</field>
+        </record>
+
+        <!-- 3. Acção para as Etapas do Ciclo ARBY (sale.order.stage) -->
+        <record id="action_arby_stages" model="ir.actions.act_window">
+            <field name="name">Etapas do Ciclo</field>
+            <field name="res_model">sale.order.stage</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- 4. Acção para Gestão de Clientes / Medidas (res.partner) -->
+        <record id="action_arby_measurements" model="ir.actions.act_window">
+            <field name="name">Registo de Medidas</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Menu Principal (Root) -->
+        <menuitem id="menu_arby_root"
+                  name="ORTEK ARBY"
+                  web_icon="ortek_arby,static/description/icon.png"
+                  sequence="10"/>
+
+        <!-- Menu do Painel de IA -->
+        <menuitem id="menu_arby_ai_dashboard"
+                  name="Painel AI"
+                  parent="menu_arby_root"
+                  action="action_ai_company_dashboard"
+                  sequence="5"/>
+
+        <!-- Submenus de Gestão -->
+        <menuitem id="menu_arby_orders"
+                  name="Encomendas e Provas"
+                  parent="menu_arby_root"
+                  action="action_arby_orders"
+                  sequence="10"/>
+
+        <menuitem id="menu_arby_customers"
+                  name="Clientes ARBY"
+                  parent="menu_arby_root"
+                  action="base.action_partner_customer_form"
+                  sequence="20"/>
+
+        <!-- Definição do Menu Pai de Medidas com Submenu Ativo -->
+        <menuitem id="menu_arby_measurements_parent"
+                  name="Medidas"
+                  parent="menu_arby_root"
+                  sequence="30"/>
+
+        <menuitem id="menu_arby_measurements_child"
+                  name="Registo de Medidas"
+                  parent="menu_arby_measurements_parent"
+                  action="action_arby_measurements"
+                  sequence="10"/>
+
+        <!-- Menu de Configurações -->
+        <menuitem id="menu_arby_config"
+                  name="Configurações"
+                  parent="menu_arby_root"
+                  sequence="100"/>
+
+        <menuitem id="menu_arby_stages"
+                  name="Etapas do Ciclo"
+                  parent="menu_arby_config"
+                  action="action_arby_stages"
+                  sequence="10"/>
+
+        <!-- Submenu para Motores de IA nas Configurações -->
+        <menuitem id="menu_arby_ai_engines"
+                  name="Motores de IA"
+                  parent="menu_arby_config"
+                  action="action_ortek_ai_engine"
+                  sequence="20"/>
+    </data>
+</odoo>

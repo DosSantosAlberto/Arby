@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista Lista (List) para Ortek Automation -->
+        <record id="view_ortek_automation_list" model="ir.ui.view">
+            <field name="name">ortek.automation.list</field>
+            <field name="model">ortek.automation</field>
+            <field name="arch" type="xml">
+                <list string="Regras de Automação Ortek" sample="1">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" class="fw-bold"/>
+                    <field name="trigger_event" widget="badge" decoration-info="True"/>
+                    <field name="action_type" widget="badge"/>
+                    <field name="execution_count" sum="Total de Execuções"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Formulário (Form) para Ortek Automation -->
+        <record id="view_ortek_automation_form" model="ir.ui.view">
+            <field name="name">ortek.automation.form</field>
+            <field name="model">ortek.automation</field>
+            <field name="arch" type="xml">
+                <form string="Regra de Automação Transversal">
+                    <header>
+                        <button name="action_execute_rule"
+                                string="Executar Manualmente"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-play"/>
+                        <field name="active" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Nome da Regra"/>
+                            <h1><field name="name" placeholder="Ex: Alerta Automático de Prazo ou Limiar Crítico"/></h1>
+                        </div>
+                        <group>
+                            <group string="Configuração do Gatilho e Ação">
+                                <field name="trigger_event"/>
+                                <field name="action_type"/>
+                            </group>
+                            <group string="Métricas e Controlo">
+                                <field name="sequence"/>
+                                <field name="execution_count" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descrição, Lógica &amp; Condições" name="desc_page">
+                                <field name="description" placeholder="Descreva a lógica universal (EVENTO → REGRA → CONDIÇÃO → AÇÃO → REGISTO)..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Ação de Janela -->
+        <record id="action_ortek_automation" model="ir.actions.act_window">
+            <field name="name">Automações Ortek</field>
+            <field name="res_model">ortek.automation</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crie a primeira Regra de Automação Transversal!
+                </p>
+                <p>
+                    Defina eventos de disparo, condições inteligentes e ações automáticas aplicáveis a qualquer fluxo de negócio da empresa.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

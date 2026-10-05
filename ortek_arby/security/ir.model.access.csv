@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ortek_automation_manager,ortek.automation.manager,model_ortek_automation,ortek_arby.group_arby_manager,1,1,1,1
+access_ortek_ai_engine_manager,ortek.ai.engine.manager,model_ortek_ai_engine,ortek_arby.group_arby_manager,1,1,1,1
+access_ortek_ai_engine_user,ortek.ai.engine.user,model_ortek_ai_engine,base.group_user,1,0,0,0
+access_sale_order_stage_user,sale.order.stage.user,model_sale_order_stage,base.group_user,1,0,0,0
+access_sale_order_stage_manager,sale.order.stage.manager,model_sale_order_stage,ortek_arby.group_arby_manager,1,1,1,1

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Utiliza o layout geral do website de forma segura -->
+    <template id="arby_payment_proof_upload" inherit_id="website.layout" name="ARBY Payment Proof Upload">
+        <xpath expr="//main" position="inside">
+            <div class="container my-4">
+                <div class="card border-primary arby-proof-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fa fa-upload me-2"/>Comprovativo de Pagamento</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted small">
+                            Se realizou o pagamento por transferência bancária, envie o comprovativo para agilizar o processamento da sua encomenda.
+                        </p>
+                        <form action="/shop/payment/upload_proof" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <!-- Proteção contra objetos nulos no contexto da página -->
+                            <t t-set="active_order" t-value="website_sale_order or website.sale_get_order() if website else False"/>
+                            <input type="hidden" name="order_id" t-att-value="active_order.id if active_order else ''"/>
+
+                            <div class="mb-3">
+                                <input type="file" name="proof_file" class="form-control" accept="image/*,application/pdf" required="1"/>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary btn-sm arby-proof-btn">
+                                Submeter Comprovativo
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

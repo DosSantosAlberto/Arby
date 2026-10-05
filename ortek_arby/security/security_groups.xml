@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_category_ortek_arby" model="ir.module.category">
+            <field name="name">ORTEK ARBY Store</field>
+            <field name="description">Gestão de permissões da loja online e atendimento.</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Grupo Apoio / Comercial -->
+        <record id="group_arby_sales" model="res.groups">
+            <field name="name">Comercial / Apoio ao Cliente</field>
+            <field name="category_id" ref="module_category_ortek_arby"/>
+            <field name="comment">Acesso a Encomendas, Agendamentos e Provas de Roupa.</field>
+        </record>
+
+        <!-- Grupo Operações / Logística -->
+        <record id="group_arby_operations" model="res.groups">
+            <field name="name">Operações / Logística</field>
+            <field name="category_id" ref="module_category_ortek_arby"/>
+            <field name="implied_ids" eval="[(4, ref('group_arby_sales'))]"/>
+            <field name="comment">Acesso à preparação de encomendas e expedição.</field>
+        </record>
+
+        <!-- Grupo Gestor / Direção -->
+        <record id="group_arby_manager" model="res.groups">
+            <field name="name">Gestor / Direção</field>
+            <field name="category_id" ref="module_category_ortek_arby"/>
+            <field name="implied_ids" eval="[(4, ref('group_arby_operations'))]"/>
+            <field name="comment">Acesso total às métricas, automações e motor de IA.</field>
+        </record>
+    </data>
+</odoo>

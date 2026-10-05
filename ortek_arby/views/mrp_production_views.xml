@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Herança na Vista Formulário de MRP para Controlo de Fabrico -->
+        <record id="view_mrp_production_form_inherit_arby" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.arby</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Alerta no topo da folha -->
+                <xpath expr="//sheet" position="inside">
+                    <div class="alert alert-warning" role="alert" invisible="arby_payment_verified or not arby_sale_order_id">
+                        <strong>Atenção:</strong> Esta ordem de fabrico está vinculada à encomenda <field name="arby_sale_order_id" readonly="1" class="oe_inline"/> e <b>aguarda validação financeira</b> para poder iniciar.
+                    </div>
+                </xpath>
+
+                <!-- XPath seguro ancorado no produto principal do cabeçalho de MRP -->
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="arby_sale_order_id"/>
+                    <field name="arby_partner_id"/>
+                    <field name="arby_payment_verified" widget="boolean_toggle"/>
+                </xpath>
+
+                <!-- Página de notas técnicas -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Notas de Produção Ortek" name="arby_notes_page">
+                        <field name="arby_production_notes" placeholder="Instruções especiais de fabrico, corte e detalhes técnicos..."/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

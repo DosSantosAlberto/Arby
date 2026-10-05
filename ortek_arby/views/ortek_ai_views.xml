@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista Lista (List) Otimizada para Odoo 18 -->
+        <record id="view_ortek_ai_engine_list" model="ir.ui.view">
+            <field name="name">ortek.ai.engine.list</field>
+            <field name="model">ortek.ai.engine</field>
+            <field name="arch" type="xml">
+                <list string="Motores de IA Ortek" sample="1">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" class="fw-bold"/>
+                    <field name="model_name"/>
+                    <field name="model_version" widget="badge" decoration-info="True"/>
+                    <field name="confidence_threshold" widget="percentage"/>
+                    <field name="total_recommendations" sum="Total de Análises"/>
+                    <field name="successful_outcomes" sum="Total de Operações Bem-sucedidas"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Formulário (Form) Rico e Profissional -->
+        <record id="view_ortek_ai_engine_form" model="ir.ui.view">
+            <field name="name">ortek.ai.engine.form</field>
+            <field name="model">ortek.ai.engine</field>
+            <field name="arch" type="xml">
+                <form string="Motor de Inteligência Artificial Transversal">
+                    <header>
+                        <button name="action_test_connection"
+                                string="Testar Ligação com o Modelo"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-bolt"/>
+                        <field name="active" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Designação do Motor"/>
+                            <h1><field name="name" placeholder="Ex: IAORTEK Orchestrator"/></h1>
+                        </div>
+                        <group>
+                            <group string="Configuração de API e LLM Real">
+                                <field name="api_key" password="True" placeholder="sk-..."/>
+                                <field name="api_endpoint" placeholder="https://api.openai.com/v1/chat/completions"/>
+                                <field name="model_name" placeholder="gpt-4o"/>
+                            </group>
+                            <group string="Parâmetros Técnicos &amp; IA">
+                                <field name="model_version"/>
+                                <field name="confidence_threshold" widget="percentage"/>
+                                <field name="sequence"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Métricas e Desempenho Operacional">
+                                <field name="total_recommendations" readonly="1"/>
+                                <field name="successful_outcomes" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Instruções e Prompts do Sistema" name="prompts_page">
+                                <field name="notes" placeholder="Insira o prompt de sistema, diretrizes operacionais, regras de negócio ou restrições de comportamento da IA..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Ação de Janela -->
+        <record id="action_ortek_ai_engine" model="ir.actions.act_window">
+            <field name="name">Motores de IA</field>
+            <field name="res_model">ortek.ai.engine</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Registe o primeiro Motor de Inteligência Artificial Ortek!
+                </p>
+                <p>
+                    Configure os parâmetros do modelo, limiares de confiança e prompts para automatizar a análise preditiva e o suporte consultivo transversal.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
